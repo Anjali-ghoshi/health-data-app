@@ -1,5 +1,4 @@
 flask
 pandas
 matplotlib
-mysql-connector-python
 gunicorn
