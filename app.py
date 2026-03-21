@@ -10,12 +10,24 @@ import matplotlib.pyplot as plt
 app = Flask(__name__)
 
 # Database connection
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="2003",
-    database="health_project"
+import sqlite3
+
+db = sqlite3.connect('database.db', check_same_thread=False)
+cursor = db.cursor()
+
+# Create table if not exists
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS patients(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    age INTEGER,
+    gender TEXT,
+    disease TEXT,
+    recovery_days INTEGER
 )
+''')
+
+db.commit()
 
 # Home page
 @app.route('/')
@@ -31,7 +43,7 @@ def add_patient():
 
         cursor.execute("""
         INSERT INTO patients(name, age, gender, disease, recovery_days)
-        VALUES(%s,%s,%s,%s,%s)
+        VALUES(?,?,?,?,?)
         """, (data['name'], data['age'], data['gender'], data['disease'], data['recovery']))
 
         db.commit()
@@ -124,7 +136,7 @@ def chart():
 @app.route('/delete/<int:id>')
 def delete(id):
     cursor = db.cursor()
-    cursor.execute("DELETE FROM patients WHERE id=%s", (id,))
+    cursor.execute("DELETE FROM patients WHERE id=?", (id,))
     db.commit()
     cursor.close()
 
@@ -134,7 +146,7 @@ def delete(id):
 @app.route('/edit/<int:id>')
 def edit(id):
     cursor = db.cursor()
-    cursor.execute("SELECT * FROM patients WHERE id=%s", (id,))
+    cursor.execute("SELECT * FROM patients WHERE id=?", (id,))
     data = cursor.fetchone()
     cursor.close()
 
@@ -148,8 +160,8 @@ def update(id):
 
     cursor.execute("""
     UPDATE patients 
-    SET name=%s, age=%s, gender=%s, disease=%s, recovery_days=%s
-    WHERE id=%s
+    SET name=?, age=?, gender=?, disease=?, recovery_days=?
+    WHERE id=?
     """, (data['name'], data['age'], data['gender'], data['disease'], data['recovery'], id))
 
     db.commit()
