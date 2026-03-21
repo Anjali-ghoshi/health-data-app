@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Health Data App</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            width: 350px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        input {
+            width: 90%;
+            padding: 8px;
+            margin: 5px;
+        }
+
+        button {
+            background: #4facfe;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #007bff;
+        }
+
+        a {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>🏥 Health Data Entry</h2>
+
+    <form action="/add" method="post">
+        <input type="text" name="name" placeholder="Name"><br>
+        <input type="number" name="age" placeholder="Age"><br>
+        <input type="text" name="gender" placeholder="Gender"><br>
+        <input type="text" name="disease" placeholder="Disease"><br>
+        <input type="number" name="recovery" placeholder="Recovery Days"><br>
+
+        <button type="submit">Add Patient</button>
+    </form>
+
+    <a href="/dashboard">View Dashboard</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Patient</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+            text-align: center;
+            color: white;
+        }
+
+        .container {
+            background: white;
+            color: black;
+            width: 350px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 90%;
+            padding: 8px;
+            margin: 5px;
+        }
+
+        button {
+            background: #ff5e62;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>✏ Edit Patient</h2>
+
+<form action="/update/{{ patient[0] }}" method="post">
+    <input name="name" value="{{ patient[1] }}"><br>
+    <input name="age" value="{{ patient[2] }}"><br>
+    <input name="gender" value="{{ patient[3] }}"><br>
+    <input name="disease" value="{{ patient[4] }}"><br>
+    <input name="recovery" value="{{ patient[5] }}"><br>
+
+    <button>Update</button>
+</form>
+
+<br>
+<a href="/dashboard">⬅ Back</a>
+
+</div>
+
+</body>
+</html>
